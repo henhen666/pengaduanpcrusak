@@ -11,9 +11,11 @@
                     <a class="nav-link" href="{{ url('/') }}">Home <span
                             class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item {{ Request::is('lapor*') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ url('/lapor') }}">Lapor PC Rusak</a>
-                </li>
+                @auth
+                    <li class="nav-item {{ Request::is('lapor*') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ url('/lapor') }}">Lapor PC Rusak</a>
+                    </li>
+                @endauth
                 <li class="nav-item">
                     <div class="dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
@@ -38,6 +40,8 @@
                             Welcome back, {{ auth()->user()->name }} !
                         </a>
                         <div class="dropdown-menu">
+                            <a href="{{ url('dashboard') }}" class="dropdown-item"><i class="bi bi-postcard"></i>&nbsp;
+                                My Dashboard</a>
                             <button type="button" class="dropdown-item" data-toggle="modal" data-target="#exampleModal">
                                 <i class="bi bi-box-arrow-right"></i>&nbsp; Logout
                             </button>

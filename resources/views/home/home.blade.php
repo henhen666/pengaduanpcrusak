@@ -23,7 +23,7 @@
                 <p>Situs ini merupakan situs pelaporan kerusakan PC Anda. <br> Halaman ini digunakan untuk mengecek status
                     perbaikan PC Anda.</p>
 
-                <a class="btn btn-primary btn-lg" href="#proses" role="button">Cek Proses Perbaikan PC</a>
+                <a class="btn btn-primary btn-lg" href="{{ url('/dashboard') }}" role="button">Cek Proses Perbaikan PC</a>
             </div>
         </div>
 
@@ -71,70 +71,7 @@
             <div class="row justify-content-center">
                 <div class="col-xl-12 col-lg-12 col-md-10 col-sm-12">
                     <div id="proses">
-                        <h3 class="text-center mb-4 text-white">Cek Proses Perbaikan PC</h3>
-                        @auth
-                            <form action="{{ url('/#proses') }}" method="get">
-                                @csrf
-                                <div class="form-group row">
-                                    <label for="staticEmail" class="col-sm-3 col-form-label text-white">Masukkan ID</label>
-                                    <div class="col-sm-9">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control"
-                                                placeholder="Masukkan ID Perbaikan PC Anda" name="id_perbaikan"
-                                                value="{{ old('id_perbaikan') }}">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-dark" type="submit" id="button-addon2">Cari</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                            <hr class="w-100 mx-auto my-4"
-                                style="border-width: 10px; background-color: white; border-radius: 5px;">
-                            <div class="card border-none" style="margin-bottom: 10%;">
-                                @if ($data)
-                                    <h4 class="text-center">Proses Perbaikan PC: {{ $data->id_perbaikan }}</h4>
-                                    <div class="mx-3 my-3">
-                                        <div class=" form-group row">
-                                            <label for="staticEmail" class="col-sm-3 col-form-label">No</label>
-                                            <div class="col-sm-9">
-                                                {{ $data->id_perbaikan }}
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="staticEmail" class="col-sm-3 col-form-label">Nama</label>
-                                            <div class="col-sm-9">
-                                                {{ $data->nama }}
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="staticEmail" class="col-sm-3 col-form-label">No. HP</label>
-                                            <div class="col-sm-9">
-                                                {{ $data->handphone }}
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="staticEmail" class="col-sm-3 col-form-label">Kategori</label>
-                                            <div class="col-sm-9">
-                                                {{ $data->category->name }}
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="staticEmail" class="col-sm-3 col-form-label">Detail</label>
-                                            <div class="col-sm-9">
-                                                {{ $data->detail }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                @else
-                                    <h5 class="text-center">Tidak ada data ditemukan</h5>
-                                @endif
-                            </div>
-                        @else
-                            <h5 class="text-center text-white" style="margin-bottom: 10%">Silakan <a
-                                    href="{{ url('login') }}" class=text-danger>Login</a>
-                                Terlebih Dahulu Untuk Mengecek Proses Perbaikan!</h5>
-                        @endauth
+                        {{--  --}}
                     </div>
                 </div>
             </div>

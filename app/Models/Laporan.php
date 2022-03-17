@@ -25,6 +25,9 @@ class Laporan extends Model
 
     public function scopeSearch($query, array $filters)
     {
-        $query->when($filters['id_perbaikan'] ?? false, fn ($query, $search) => $query->where('id_perbaikan', $search));
+        $query->when(
+            $filters['id_perbaikan'] ?? false,
+            fn ($query, $perbaikan) => $query->where('id_perbaikan', $perbaikan)
+        );
     }
 }

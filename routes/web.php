@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::controller(App\Http\Controllers\HomeController::class)->group(function () {
-    Route::get('/', 'index');
+    Route::get('/', 'index')->name('login');
 });
 
 Route::controller(App\Http\Controllers\AuthController::class)->group(function () {
@@ -28,4 +28,14 @@ Route::controller(App\Http\Controllers\AuthController::class)->group(function ()
 Route::controller(App\Http\Controllers\LaporanController::class)->group(function () {
     Route::get('lapor', 'index');
     Route::post('lapor', 'create')->middleware('auth');
+});
+
+Route::middleware('is_admin')->group(function () {
+    // Route::controller('')
+});
+
+Route::middleware('auth')->group(function () {
+    Route::controller(\App\Http\Controllers\DashboardController::class)->group(function () {
+        Route::get('dashboard', 'dashboard');
+    });
 });

@@ -7,15 +7,14 @@ body {
   font-family: "Raleway";
 }
 
-body #body-lapor .container {
+body #body-lapor {
   background: url("../img/pc_1.jpg") no-repeat;
-  background-position: relative;
   background-position-y: 200%;
   background-position-x: 100%;
 }
 
 @media (max-width: 600px) {
-  body #body-lapor .container {
+  body #body-lapor {
     background: url("../img/pc_1.jpg") no-repeat;
     background-position-y: 65%;
     background-position-x: 60%;
@@ -24,7 +23,7 @@ body #body-lapor .container {
 }
 
 @media (max-width: 1200px) {
-  body #body-lapor .container {
+  body #body-lapor {
     background: url("../img/pc_1.jpg") no-repeat;
     background-position-y: 60%;
     background-position-x: 60%;
