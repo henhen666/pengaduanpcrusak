@@ -1,0 +1,74 @@
+$white: #eee;
+
+nav {
+    font-family: "Roboto Slab";
+    background-color: rgb(27, 27, 56);
+}
+
+body {
+    font-family: "Raleway";
+
+    #body-lapor {
+        & .container {
+            background: url("../img/pc_1.jpg") no-repeat;
+            background-position: relative;
+            background-position-y: 200%;
+            background-position-x: 100%;
+        }
+
+        @media (max-width: 600px) {
+            & .container {
+                background: url("../img/pc_1.jpg") no-repeat;
+                background-position-y: 65%;
+                background-position-x: 60%;
+                background-size: 1200px;
+            }
+        }
+        @media (max-width: 1200px) {
+            & .container {
+                background: url("../img/pc_1.jpg") no-repeat;
+                background-position-y: 60%;
+                background-position-x: 60%;
+                background-size: 1400px;
+            }
+        }
+    }
+    #body-home {
+        background-color: rgba(25, 40, 104, 0.712);
+    }
+}
+
+footer {
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+}
+
+.jumbotron {
+    background-color: rgb(158, 158, 245);
+    color: $white;
+    text-align: right;
+
+    #body-home & {
+        background: url("../img/jumbotron.jpg") no-repeat;
+        background-size: 100%;
+        background-position-y: 10%;
+        color: $white;
+        text-align: right;
+    }
+}
+
+.card {
+    #proses & {
+        background-color: rgba(105, 105, 201, 0.5);
+        border: none;
+        color: $white;
+        box-shadow: 7px 7px 8px rgba(71, 71, 71, 0.3);
+    }
+}
+
+.card-home {
+    background-color: rgba(243, 243, 243, 0.3);
+    color: $white;
+    border: none;
+}
