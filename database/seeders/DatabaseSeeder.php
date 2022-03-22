@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Category;
 use App\Models\User;
+use App\Models\Status;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,10 +17,16 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'Henry Salim',
+            'username' => 'Henry Salim',
             'email' => 'henrysalim22@gmail.com',
             'password' => bcrypt('password'),
             'is_admin' => true
+        ]);
+        User::create([
+            'username' => 'henheenn',
+            'email' => 'henry@gmail.com',
+            'password' => bcrypt('password'),
+            'is_admin' => false
         ]);
         User::factory(10)->create();
         Category::create([
@@ -30,6 +37,15 @@ class DatabaseSeeder extends Seeder
         ]);
         Category::create([
             'name' => 'Kerusakan Parah'
+        ]);
+        Status::create([
+            'status' => 'Pending'
+        ]);
+        Status::create([
+            'status' => 'On Process'
+        ]);
+        Status::create([
+            'status' => 'Finish'
         ]);
     }
 }

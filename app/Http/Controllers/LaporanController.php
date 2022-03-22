@@ -13,7 +13,11 @@ class LaporanController extends Controller
     {
         return view('lapor.lapor', [
             'title' => 'Buat Laporan',
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'laporan' => Laporan::latest()
+                ->matchuser()
+                ->limit(1)
+                ->get()
         ]);
     }
 
@@ -25,11 +29,12 @@ class LaporanController extends Controller
             'handphone' => 'required|numeric',
             'category_id' => 'required',
             'user_id' => 'required',
-            'detail' => 'required|min:8|max:255'
+            'detail' => 'required|min:10|max:255',
+            'status_id' => 'required'
         ]);
         $data['id_perbaikan'] = IdGenerator::generate(['table' => 'laporan', 'length' => '15', 'field' => 'id_perbaikan', 'prefix' => date('dmy') . 'LPPC-']);
 
         Laporan::create($data);
-        return back()->with('success', 'Laporan Anda Berhasil Disubmit!');
+        return redirect("/lapor#sukses")->with('success', 'Laporan Anda Berhasil Disubmit!');
     }
 }

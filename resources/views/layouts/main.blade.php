@@ -26,11 +26,8 @@
 
 <body>
     @include('components.navbar')
-
     @yield('content')
-
     @include('components.footer')
-
     @include('components.logout')
     @include('auth.login')
 

@@ -2,42 +2,29 @@
 
 @section('content')
     <div id="body-lapor">
-        <div class="jumbotron jumbotron-fluid mt-5">
-            <div class=" container">
-                <h3 class="display-4">Punya keluhan terkait PC Anda?
-                </h3>
-                <p class="lead">Silakan isi form di bawah ini agar segera kami proses</p>
-            </div>
-        </div>
-
-        <div class="container mt-5" style="margin-bottom: 3%;">
-            @if (session()->has('success'))
-                <div class="row justify-content-center">
-                    <div class="col-xl-8 col-lg-8 col-md-10 col-sm-12">
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ session('success') }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    </div>
+        <div id="lapor-wrapper">
+            <div class="jumbotron jumbotron-fluid mt-5">
+                <div class="container">
+                    <h3 class="display-4">Punya keluhan terkait PC Anda?
+                    </h3>
+                    <p class="lead">Silakan isi form di bawah ini agar segera kami proses</p>
                 </div>
-            @endif
-
-            @auth
+            </div>
+            <div class="container mt-5" style="margin-bottom: 3%;">
                 <div class="row justify-content-center text-white" id="proses">
                     <div class="col-xl-8 col-lg-8 col-md-10 col-sm-12">
                         <div class="card border-none" style="margin-bottom: 10%;">
-                            <h3 class="text-center">Silakan Isi Form di Bawah Ini</h3>
+                            <h3 class="text-center pt-2">Silakan Isi Form di Bawah Ini</h3>
                             <form class="mt-4 mx-3 my-3" action="{{ url('lapor') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="id_perbaikan" value="">
+                                <input type="hidden" name="status_id" value="1">
                                 <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                                 <div class="form-group row">
                                     <label for="staticEmail" class="col-sm-3 col-form-label">Nama Lengkap</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama"
-                                            id="staticEmail" value="{{ old('nama') }}">
+                                        <input type="text" class="form-control @error('nama') is-invalid @enderror"
+                                            name="nama" id="staticEmail" value="{{ old('nama', auth()->user()->name) }}">
                                         @error('nama')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -92,11 +79,63 @@
                         </div>
                     </div>
                 </div>
-            @else
-                <h5 class="text-center" style="margin-bottom: 10%">Silakan <a href="{{ url('login') }}"
-                        class="text-decoration-none text-danger">Login</a>
-                    Terlebih Dahulu Untuk Mengakses Form!</h5>
-            @endauth
+                @if (session()->has('success'))
+                    <div class="row justify-content-center" id="sukses">
+                        <div class="col-xl-8 col-lg-8 col-md-10 col-sm-12">
+                            <div class="my-3 alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center text-white" id="proses">
+                        <div class="col-xl-8 col-lg-8 col-md-10 col-sm-12">
+                            @foreach ($laporan as $data)
+                                <div class="card border-none" style="margin-bottom: 10%;">
+                                    <div class="mx-3">
+                                        <h3 class="text-center pt-2 mb-3">Laporan PC Anda:</h3>
+                                        <div class="form-group row">
+                                            <label for="staticEmail" class="col-sm-3 col-form-label">ID</label>
+                                            <div class="col-sm-9">
+                                                {{ $data->id_perbaikan }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="staticEmail" class="col-sm-3 col-form-label">Nama Lengkap</label>
+                                            <div class="col-sm-9">
+                                                {{ $data->nama }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="staticEmail" class="col-sm-3 col-form-label">No. Handphone</label>
+                                            <div class="col-sm-9">
+                                                {{ $data->handphone }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="staticEmail" class="col-sm-3 col-form-label">Kategori
+                                                Kerusakan</label>
+                                            <div class="col-sm-9">
+                                                {{ $data->category->name }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="staticEmail" class="col-sm-3 col-form-label">Detail
+                                                Kerusakan</label>
+                                            <div class="col-sm-9">
+                                                {{ $data->detail }}
+                                            </div>
+                                        </div>
+                                        <small class="text-right">Mohon simpan data di atas untuk keperluan Anda</small>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+            </div>
         </div>
     </div>
 @endsection

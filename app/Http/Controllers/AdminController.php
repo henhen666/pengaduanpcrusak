@@ -6,12 +6,17 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AuthController extends Controller
+class AdminController extends Controller
 {
-    public function login()
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
-        return view('auth.login', [
-            'title' => 'Login Page'
+        return view('auth.admin_login', [
+            'title' => 'Admin Login'
         ]);
     }
 
@@ -19,29 +24,36 @@ class AuthController extends Controller
     {
         $data = $request->validate([
             'email' => 'required|email:dns',
-            'password' => 'required|min:8'
+            'password' => 'required|min:8',
+            'is_admin' => 'required'
         ]);
 
         if (Auth::attempt($data)) {
             $request->session()->regenerate();
-            return redirect()->intended('/')->with('login', 'Welcome back, ');
+            return redirect()->intended('/admin/dashboard')->with('login', 'Welcome back, ');
         }
 
         return back()->with('failed', 'Failed To Login. Please Try Again!');
     }
 
-    public function register(Request $request)
+    public function register()
+    {
+        return view('auth.admin_register', [
+            'title' => 'Registration Page'
+        ]);
+    }
+
+    public function create(Request $request)
     {
         $data = $request->validate([
             'username' => 'required|min:8|max:50',
             'email' => 'required|email:dns|max:55|unique:users,email',
-            'password' => 'required|min:8'
+            'password' => 'required|min:8',
+            'is_admin' => 'required'
         ]);
-
         $data['password'] = bcrypt($data['password']);
-
         User::create($data);
-        return back()->with('success', 'Registration Success!');
+        return redirect('admin')->with('success', 'Registration Success!');
     }
 
     public function logout(Request $request)
@@ -49,6 +61,6 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/')->with('logout', "Anda Telah Logout. Terima Kasih!");
+        return redirect('/admin')->with('logout', "Anda Telah Logout. Terima Kasih!");
     }
 }

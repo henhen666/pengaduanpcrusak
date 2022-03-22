@@ -1,4 +1,4 @@
-<div class="modal fade" id="auth" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -10,21 +10,6 @@
             <form class="user" method="post" action="{{ url('login') }}">
                 @csrf
                 <div class="modal-body">
-                    @if (session()->has('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ session('success') }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @elseif (session()->has('failed'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            {{ session('failed') }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @endif
                     <div class="form-group">
                         <input type="text" class="form-control form-control-user @error('email') is-invalid @enderror"
                             name="email" value="{{ old('email') }}" placeholder="Enter Email Address...">
@@ -69,9 +54,9 @@
                             @csrf
                             <div class="form-group">
                                 <input type="text"
-                                    class="form-control form-control-user @error('name') is-invalid @enderror"
-                                    id="exampleFirstName" placeholder="Full Name" name="name" name="name"
-                                    value="{{ old('name') }}">
+                                    class="form-control form-control-user @error('username') is-invalid @enderror"
+                                    id="exampleFirstName" placeholder="Full Name" name="username"
+                                    value="{{ old('username') }}">
                                 @error('name')
                                     <div class="invalid-feedback pl-2">
                                         {{ $message }}

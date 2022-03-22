@@ -37,19 +37,20 @@
                     <div class="dropdown">
                         <a class="text-decoration-none text-white dropdown-toggle" type="button" id="dropdownMenuButton"
                             data-toggle="dropdown" aria-expanded="false">
-                            Welcome back, {{ auth()->user()->name }} !
+                            Welcome back, {{ auth()->user()->username }} !
                         </a>
                         <div class="dropdown-menu">
-                            <a href="{{ url('dashboard') }}" class="dropdown-item"><i class="bi bi-postcard"></i>&nbsp;
+                            <a href="{{ url('user/dashboard') }}" class="dropdown-item"><i
+                                    class="bi bi-postcard"></i>&nbsp;
                                 My Dashboard</a>
-                            <button type="button" class="dropdown-item" data-toggle="modal" data-target="#exampleModal">
+                            <button type="button" class="dropdown-item" data-toggle="modal" data-target="#auth">
                                 <i class="bi bi-box-arrow-right"></i>&nbsp; Logout
                             </button>
                         </div>
                     </div>
                 @else
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('#auth') }}" data-toggle="modal" data-target="#auth">
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#login">
                             <i class="bi bi-box-arrow-right"></i>&nbsp; Login
                         </a>
                     </li>

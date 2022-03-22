@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\DashboardLaporanController;
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,23 +21,46 @@ Route::controller(App\Http\Controllers\HomeController::class)->group(function ()
 
 Route::controller(App\Http\Controllers\AuthController::class)->group(function () {
     Route::post('/login', 'authenticate');
-
-    Route::post('/register', 'register')->middleware('guest');
-
-    Route::post('logout', 'logout')->middleware('auth');
+    Route::post('/register', 'register');
+    Route::post('user/logout', 'logout')->middleware('auth');
 });
 
-Route::controller(App\Http\Controllers\LaporanController::class)->group(function () {
-    Route::get('lapor', 'index');
-    Route::post('lapor', 'create')->middleware('auth');
+Route::controller(App\Http\Controllers\LaporanController::class)
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('lapor', 'index');
+        Route::post('lapor', 'create');
+    });
+
+Route::controller(App\Http\Controllers\AdminController::class)->group(function () {
+    Route::get('/admin', 'index');
+    Route::get('/admin/register', 'register');
+    Route::post('/admin/login', 'authenticate');
+    Route::post('/admin/register', 'create');
 });
 
-Route::middleware('is_admin')->group(function () {
-    // Route::controller('')
+Route::group([
+    'middleware' => 'is_admin',
+    'prefix' => 'admin',
+    'as' => 'admin'
+], function () {
+    Route::controller(App\Http\Controllers\DashboardController::class)->group(function () {
+        Route::get('/dashboard', 'dashboard');
+    });
+    Route::resource('dashboard/laporan', DashboardLaporanController::class);
 });
 
-Route::middleware('auth')->group(function () {
-    Route::controller(\App\Http\Controllers\DashboardController::class)->group(function () {
-        Route::get('dashboard', 'dashboard');
+Route::group([
+    'middleware' => 'auth',
+    'prefix' => 'user',
+    'as' => 'user'
+], function () {
+    Route::get('dashboard', [App\Http\Controllers\DashboardController::class, 'dashboard']);
+    Route::resource('dashboard/laporan', DashboardLaporanController::class);
+    Route::get('dashboard/profile', function () {
+        return view('dashboard.profile.index', [
+            'title' => 'Profile',
+            'user' => User::where('id', auth()->user()->id)->get()
+        ]);
     });
 });

@@ -13,15 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('laporan', function (Blueprint $table) {
+        Schema::create('statuses', function (Blueprint $table) {
             $table->id();
-            $table->string('id_perbaikan');
-            $table->string('nama');
-            $table->string('handphone');
-            $table->foreignId('category_id');
-            $table->foreignId('user_id');
-            $table->text('detail');
-            $table->foreignId('status_id');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -33,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('laporan');
+        Schema::dropIfExists('statuses');
     }
 };
