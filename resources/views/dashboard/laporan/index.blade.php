@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-12">
+        <div class="col-8">
             @can('admin')
                 <form action="{{ url('admin/dashboard/laporan') }}" method="get">
                 @elsecan('users')
@@ -26,6 +26,10 @@
                         </button>
                     </div>
                 @endif
+        </div>
+        <div class="col-4">
+            <a href="{{ url('admin/laporan/export') }}" class="btn btn-primary"><i
+                    class="fas fa-solid fa-file-excel"></i>&nbsp; Export To Excel</a>
         </div>
     </div>
     <div class="row">

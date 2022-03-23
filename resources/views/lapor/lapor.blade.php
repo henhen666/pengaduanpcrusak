@@ -24,7 +24,8 @@
                                     <label for="staticEmail" class="col-sm-3 col-form-label">Nama Lengkap</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control @error('nama') is-invalid @enderror"
-                                            name="nama" id="staticEmail" value="{{ old('nama', auth()->user()->name) }}">
+                                            name="nama" id="staticEmail"
+                                            value="{{ old('nama', auth()->user()->username) }}">
                                         @error('nama')
                                             <div class="invalid-feedback">
                                                 {{ $message }}

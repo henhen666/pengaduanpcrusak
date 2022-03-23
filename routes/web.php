@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardLaporanController;
+use App\Http\Controllers\LaporanController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 
@@ -25,7 +26,7 @@ Route::controller(App\Http\Controllers\AuthController::class)->group(function ()
     Route::post('user/logout', 'logout')->middleware('auth');
 });
 
-Route::controller(App\Http\Controllers\LaporanController::class)
+Route::controller(LaporanController::class)
     ->middleware('auth')
     ->group(function () {
         Route::get('lapor', 'index');
@@ -48,6 +49,7 @@ Route::group([
         Route::get('/dashboard', 'dashboard');
     });
     Route::resource('dashboard/laporan', DashboardLaporanController::class);
+    Route::get('laporan/export', [LaporanController::class, 'export']);
 });
 
 Route::group([

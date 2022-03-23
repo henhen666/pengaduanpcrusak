@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Laporan;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\LaporanExport;
 
 class LaporanController extends Controller
 {
@@ -36,5 +38,10 @@ class LaporanController extends Controller
 
         Laporan::create($data);
         return redirect("/lapor#sukses")->with('success', 'Laporan Anda Berhasil Disubmit!');
+    }
+
+    public function export()
+    {
+        return Excel::download(new LaporanExport, 'Laporan Kerusakan PC_' . date("d-m-Y", "h:i:sa") . '.xlsx');
     }
 }

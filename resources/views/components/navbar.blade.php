@@ -39,14 +39,25 @@
                             data-toggle="dropdown" aria-expanded="false">
                             Welcome back, {{ auth()->user()->username }} !
                         </a>
-                        <div class="dropdown-menu">
-                            <a href="{{ url('user/dashboard') }}" class="dropdown-item"><i
-                                    class="bi bi-postcard"></i>&nbsp;
-                                My Dashboard</a>
-                            <button type="button" class="dropdown-item" data-toggle="modal" data-target="#auth">
-                                <i class="bi bi-box-arrow-right"></i>&nbsp; Logout
-                            </button>
-                        </div>
+                        @can('admin')
+                            <div class="dropdown-menu">
+                                <a href="{{ url('admin/dashboard') }}" class="dropdown-item"><i
+                                        class="bi bi-postcard"></i>&nbsp;
+                                    My Dashboard</a>
+                                <button type="button" class="dropdown-item" data-toggle="modal" data-target="#auth">
+                                    <i class="bi bi-box-arrow-right"></i>&nbsp; Logout
+                                </button>
+                            </div>
+                        @elsecan('users')
+                            <div class="dropdown-menu">
+                                <a href="{{ url('user/dashboard') }}" class="dropdown-item"><i
+                                        class="bi bi-postcard"></i>&nbsp;
+                                    My Dashboard</a>
+                                <button type="button" class="dropdown-item" data-toggle="modal" data-target="#auth">
+                                    <i class="bi bi-box-arrow-right"></i>&nbsp; Logout
+                                </button>
+                            </div>
+                        @endcan
                     </div>
                 @else
                     <li class="nav-item">

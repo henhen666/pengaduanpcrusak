@@ -20,11 +20,10 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Jumlah PC yang Anda Laporkan</div>
+                                Jumlah Laporan PC</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $laporan->count() }}</div>
                         </div>
                         <div class="col-auto">
-                            {{-- <i class="fas fa-computer fa-2x text-gray-300"></i> --}}
                             <span class="fas fa-2x fa-solif fa-flag"></span>
                         </div>
                     </div>
@@ -41,7 +40,6 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $diperbaiki->count() }}</div>
                         </div>
                         <div class="col-auto">
-                            {{-- <i class="fas fa-dollar-sign fa-2x text-gray-300"></i> --}}
                             <span class="fas fa-2x fa-computer"></span>
                         </div>
                     </div>
@@ -74,7 +72,6 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $process->count() }}</div>
                         </div>
                         <div class="col-auto">
-                            {{-- <i class="fas fa-dollar-sign fa-2x text-gray-300"></i> --}}
                             <h2><i class="bi bi-tools"></i></h2>
                         </div>
                     </div>
