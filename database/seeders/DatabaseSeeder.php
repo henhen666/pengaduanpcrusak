@@ -47,5 +47,8 @@ class DatabaseSeeder extends Seeder
         Status::create([
             'status' => 'Finish'
         ]);
+        Status::create([
+            'status' => 'Dibatalkan'
+        ]);
     }
 }

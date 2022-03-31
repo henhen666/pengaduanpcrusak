@@ -19,7 +19,7 @@ class AuthServiceProvider extends ServiceProvider
 
     /**
      * Register any authentication / authorization services.
-     *
+     *.php
      * @return void
      */
     public function boot()

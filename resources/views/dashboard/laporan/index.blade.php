@@ -18,20 +18,25 @@
                         </div>
                     </div>
                 </form>
-                @if (session()->has('success'))
-                    <div class="my-3 alert alert-success alert-dismissible fade show" role="alert">
-                        {{ session('success') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                @endif
+
         </div>
         <div class="col-4">
             <a href="{{ url('admin/laporan/export') }}" class="btn btn-primary"><i
                     class="fas fa-solid fa-file-excel"></i>&nbsp; Export To Excel</a>
         </div>
     </div>
+    @if (session()->has('success'))
+        <div class="row">
+            <div class="col-12">
+                <div class="my-3 alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    @endif
     <div class="row">
         <div class="col-12">
             <div class="table-responsive">

@@ -88,9 +88,9 @@ class DashboardLaporanController extends Controller
         }
 
         $data = $request->validate([
-            'handphone' => 'required',
-            'category_id' => 'required',
-            'detail' => 'required|min:10|max:255',
+            'handphone' => 'string',
+            'category_id' => 'numeric',
+            'detail' => 'string|min:10|max:255',
         ]);
 
         Laporan::whereRaw('id = ?', [$laporan->id])

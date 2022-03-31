@@ -140,7 +140,7 @@
                 <form action="{{ url('user/dashboard/laporan/' . $laporan->id) }}" method="post">
                     @method('put')
                     @csrf
-                    <input type="hidden" name="status" value="Dibatalkan">
+                    <input type="hidden" name="status" value="4">
                     <button type="submit" class="btn btn-danger">Oke</button>
                 </form>
             </div>
